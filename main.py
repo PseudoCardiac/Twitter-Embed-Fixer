@@ -15,8 +15,10 @@ with open( "data/messages.json", 'r', encoding="UTF8" ) as f:
 
 @CLIENT.event
 async def on_ready():
-    print( "===== TWITTER EMBEDDER READY =====" )
-    # TODO: 참여 중인 길드 목록 표시
+    print( "Twitter Embedder Currently Running On:" )
+    print()
+    for guild in CLIENT.guilds:
+        print( f"{guild.name} ({ str( guild.id ) })" )
 
 
 @CLIENT.event
