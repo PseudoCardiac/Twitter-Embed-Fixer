@@ -6,8 +6,8 @@ if TYPE_CHECKING:
 
 def getServerLanguage( msg: "discord.Message" ):
     """
-    디스코드 메시지로부터 서버 ID를 찾아 그 서버의 언어 설정을 반환합니다. \\
-    언어가 설정되지 않은 경우 영어로 설정한 뒤 `"en"`을 반환합니다.
+    디스코드 메시지로부터 서버 ID를 찾아 그 서버의 언어 설정을 반환한다. \\
+    언어가 설정되지 않은 경우 영어로 설정한 뒤 `"en"`을 반환한다.
 
     :param discord.Message msg: 서버 ID를 찾을 메시지
 
@@ -33,8 +33,8 @@ def getServerLanguage( msg: "discord.Message" ):
     if language is None:
         # 새로운 설정 등록
         LANGUAGE_CONFIG[ str( ID ) ] = "en"
-        with open( "data/language_config.json", 'w', encoding="UTF8" ) as f:
-            json.dump( LANGUAGE_CONFIG, f )
+        with open( "data/language_config.json", 'w', encoding="UTF8", ) as f:
+            json.dump( LANGUAGE_CONFIG, f, indent=4 )
 
         language = "en"
 

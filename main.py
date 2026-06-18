@@ -25,6 +25,7 @@ async def on_message( msg: discord.Message ):
     if msg.author.bot:
         return
 
+    # 멘션 + 언어 키워드 -> 언어 설정 변경
     if msg.content.startswith( "<@1516141205530874007>" ):
         originalLanguage = getServerLanguage( msg )
         language = setServerLanguage( msg.guild.id, msg.content.partition( "<@1516141205530874007>" )[2] )    # type: ignore
@@ -34,14 +35,17 @@ async def on_message( msg: discord.Message ):
         else:
             await msg.reply( MESSAGES[ "languageNotChanged" ][ originalLanguage ] )
 
+        return
+
     # 메시지에 포함된 트위터 URL 또는 False
     xUrl = extractUrl( msg )
+
+    # 메시지에 트위터 URL이 포함되지 않은 경우 리턴
     if not xUrl:
         return
 
     content = formatUrl( msg, xUrl )
     language = getServerLanguage( msg )
-
     view = myView( xUrl, language )
 
     try:
@@ -57,6 +61,7 @@ async def on_message( msg: discord.Message ):
 
 @CLIENT.event
 async def on_interaction( interaction: discord.Interaction ):
+    # 임베드 삭제 버튼이 눌렸을 때에만 반응
     if interaction.type == discord.InteractionType.component and interaction.custom_id == "deleteButton":
         msg = interaction.message
 
@@ -68,8 +73,11 @@ async def on_interaction( interaction: discord.Interaction ):
 
         LANGUAGE = getServerLanguage( msg )
 
+        # 버튼을 누른 유저와 메시지에 멘션된 유저가 서로 다름
         if ( interaction.user != msg.mentions[0] ):
+            # 메시지 삭제 거부
             await interaction.response.send_message( content=MESSAGES[ "notYourMessage" ][ LANGUAGE ], ephemeral=True )
+        # 버튼을 누른 유저와 메시지에 멘션된 유저가 서로 일치
         else:
             try:
                 await msg.delete()

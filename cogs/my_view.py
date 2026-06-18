@@ -38,15 +38,3 @@ def myView( xUrl: str, language: str ):
     myView.add_item( urlButton )
 
     return myView
-
-
-# class DeleteButton( Button ):
-#     def __init__( self, language ):
-#         super().__init__(
-#             style = ButtonStyle.danger,
-#             label = MESSAGES[ "deleteLabel" ][ language ],
-#             emoji = "<:trash_bin:1516779355471352049>"
-#         )
-
-#     async def callback( self, interaction: discord.Interaction ):
-#         self.parent
