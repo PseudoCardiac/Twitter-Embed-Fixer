@@ -1,0 +1,1 @@
+from cogs.my_view import myView

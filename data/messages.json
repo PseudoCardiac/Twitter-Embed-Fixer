@@ -30,14 +30,26 @@
     },
 
     "output": {
-        "ko" : " 님이 공유한 [트윗](",
-        "en" : " shared a [tweet](",
-        "jp" : " さんが共有した[ツイート]("
+        "ko": " 님이 공유한 [트윗](",
+        "en": " shared a [tweet](",
+        "jp": " さんが共有した[ツイート]("
     },
     
     "spoileredOutput": {
-        "ko" : " 님이 공유한 ||[트윗](",
-        "en" : " shared a ||[tweet](",
-        "jp" : " さんが共有した||[ツイート]("
+        "ko": " 님이 공유한 ||[트윗](",
+        "en": " shared a ||[tweet](",
+        "jp": " さんが共有した||[ツイート]("
+    },
+
+    "languageChanged": {
+        "ko": "언어가 한국어로 변경되었습니다.",
+        "en": "Language set to English.",
+        "jp": "表示言語が日本語に変更されました。"
+    },
+
+    "languageNotChanged": {
+        "ko": "올바른 언어 키워드가 아닙니다. (`ko`, `en`, `jp`)",
+        "en": "Incorrect language keyword. (`ko`, `en`, `jp`)",
+        "jp": "言語キーワードが正しくありません。 (`ko`, `en`, `jp`)"
     }
 }
