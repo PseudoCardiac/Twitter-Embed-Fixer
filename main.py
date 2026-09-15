@@ -1,4 +1,4 @@
-import discord, os, json
+import discord, os, json, asyncio, tracemalloc
 from dotenv import load_dotenv
 from utils import formatUrl, getServerLanguage, extractUrl, getServerLanguage, setServerLanguage
 from cogs import myView
@@ -12,6 +12,37 @@ TREE = discord.app_commands.CommandTree( CLIENT )
 with open( "data/messages.json", 'r', encoding="UTF8" ) as f:
     MESSAGES: dict[ str, dict [str, str] ] = json.load( f )
 
+
+tracemalloc.start()
+
+
+@CLIENT.event
+async def setup_hook():
+    memoryTask = asyncio.create_task( memorySnapshotTask() )
+
+
+async def memorySnapshotTask():
+    snapshot1 = None
+    SCY = await CLIENT.fetch_user( 513676568745213953 )
+
+    while True:
+        snapshot2 = tracemalloc.take_snapshot()
+
+        if snapshot1:
+            top_stats = snapshot2.compare_to( snapshot1, 'lineno' )
+            statMsg = "[ 메모리 증가 Top 10 ]\n"
+
+            for stat in top_stats[:10]:
+                statMsg += statMsg + str( stat ) + '\n'
+
+            await SCY.send( statMsg )
+
+        else:
+            await SCY.send( "메모리 모니터링 개시" )
+
+        snapshot1 = snapshot2
+        await asyncio.sleep( 3600 )
+        
 
 @CLIENT.event
 async def on_ready():
