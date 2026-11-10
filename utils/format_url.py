@@ -48,6 +48,6 @@ def formatUrl( msg: "discord.Message", xUrl: str ):
 
     if isUrlSpoilered:
         # 스포일러 처리 후 반환
-        return f"<@{username}>" + MESSAGES[ "spoileredOutput" ][ language ] + converted + ")||"
+        return username + MESSAGES[ "spoileredOutput" ][ language ] + converted + ")||"
     else:
-        return f"<@{username}>" + MESSAGES[ "output" ][ language ] + converted + ")"
+        return username + MESSAGES[ "output" ][ language ] + converted + ")"
