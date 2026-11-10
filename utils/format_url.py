@@ -44,10 +44,10 @@ def formatUrl( msg: "discord.Message", xUrl: str ):
     language = getServerLanguage( msg )
 
     # 유저 아이디 취득
-    id = msg.author.id
+    username = msg.author.display_name
 
     if isUrlSpoilered:
         # 스포일러 처리 후 반환
-        return f"<@{id}>" + MESSAGES[ "spoileredOutput" ][ language ] + converted + ")||"
+        return f"<@{username}>" + MESSAGES[ "spoileredOutput" ][ language ] + converted + ")||"
     else:
-        return f"<@{id}>" + MESSAGES[ "output" ][ language ] + converted + ")"
+        return f"<@{username}>" + MESSAGES[ "output" ][ language ] + converted + ")"
